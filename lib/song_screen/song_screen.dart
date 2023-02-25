@@ -16,6 +16,9 @@ class AssetAudioPlayer extends StatefulWidget {
     this.playbackButtonColor,
     this.activeTrackColor,
     this.elevation,
+    this.height,
+    this.image,
+    this.width,
   });
 
   final Audio audio;
@@ -25,6 +28,9 @@ class AssetAudioPlayer extends StatefulWidget {
   final Color playbackButtonColor;
   final Color activeTrackColor;
   final double elevation;
+  final double height;
+  final Image image;
+  final double width;
 
   @override
   __AssetAudioPlayerState createState() => __AssetAudioPlayerState();
@@ -32,53 +38,6 @@ class AssetAudioPlayer extends StatefulWidget {
 
 class __AssetAudioPlayerState extends State<AssetAudioPlayer> {
   AssetsAudioPlayer player = new AssetsAudioPlayer();
-  // static const double _playerMinHeight = 60.0;
-  // int currentTabIndex = 0;
-  // bool isPlaying = false;
-  // Music music;
-
-  // Widget miniPlayer(Music music, {bool stop = false}) {
-  //   this.music = music;
-
-  //   // if (music == null) {
-  //   //   return SizedBox();
-  //   // }
-  //   if (stop) {
-  //     isPlaying = false;
-  //     player.isPlaying;
-  //   }
-  //   // setState(() {});
-  //   Size deviceSize = MediaQuery.of(context).size;
-  //   return AnimatedContainer(
-  //     duration: const Duration(milliseconds: 500),
-  //     color: Colors.blueGrey,
-  //     width: deviceSize.width,
-  //     height: 50,
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Image.asset('assets/images/LOVE_IN_MUSIC_(1).png', fit: BoxFit.cover),
-  //         Text(
-  //           'hi',
-  //           style: TextStyle(color: Colors.white, fontSize: 20),
-  //         ),
-  //         IconButton(
-  //             onPressed: () async {
-  //               isPlaying = !isPlaying;
-  //               if (isPlaying) {
-  //                 await player.play();
-  //               } else {
-  //                 await player.pause();
-  //               }
-  //               setState(() {});
-  //             },
-  //             icon: isPlaying
-  //                 ? Icon(Icons.pause, color: Colors.white)
-  //                 : Icon(Icons.play_arrow, color: Colors.white))
-  //       ],
-  //     ),
-  //   );
-  // }
 
   AssetsAudioPlayer _assetsAudioPlayer;
 
@@ -96,10 +55,14 @@ class __AssetAudioPlayerState extends State<AssetAudioPlayer> {
     } else {
       await _assetsAudioPlayer.open(
         Playlist(audios: [widget.audio]),
+        loopMode: LoopMode.playlist,
         showNotification: true,
         autoStart: true,
         playInBackground: PlayInBackground.enabled,
       );
+      _assetsAudioPlayer.next();
+      _assetsAudioPlayer.previous();
+      _assetsAudioPlayer.playlistPlayAtIndex(1);
     }
   }
 
@@ -125,6 +88,7 @@ class __AssetAudioPlayerState extends State<AssetAudioPlayer> {
               player: _assetsAudioPlayer,
               builder: (context, isPlaying) {
                 final childWidget = Container(
+                  height: widget.height,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: widget.fillColor,
@@ -198,8 +162,6 @@ class __AssetAudioPlayerState extends State<AssetAudioPlayer> {
                     child: childWidget);
               }));
 }
-
-class LargeAssetAudioPlayer extends StatefulWidget {}
 
 class PositionSeekWidget extends StatefulWidget {
   const PositionSeekWidget({

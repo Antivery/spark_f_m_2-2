@@ -206,11 +206,11 @@
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		77NdQwRjnGs7IYn0WJ3eyChT6V0=
+		96DHB5Eq8sd/YzGd0dmyixk9+x4=
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		wOQ5onfH0F844H7Z8YWCnHHg4O8=
+		Or2JGssE3HMkZ0F7bWs9YC8+O+M=
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -222,7 +222,7 @@
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Z+38LDKMPEtwZM0ibhpBuCA/UMw=
+		OGvoYmnjKpJUdl9KRNcm/MpcVWg=
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -234,7 +234,7 @@
 		</data>
 		<key>Modules/DKImagePickerController.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		zgXVJ1UZVuCyFaktv0uuwy0V0Uo=
+		czvLxq/R035PTYr6a4Jn58N0sPw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -455,14 +455,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/xBRlxorg5F73MJpn8Dr5oq9OQNp/Zv3Z3bdksMU0jA=
+			z87a4SxUPWeDrkdZR4qumEa8BR/AaGdXZwmUS4rmHns=
 			</data>
 		</dict>
 		<key>Modules/DKImagePickerController.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qIvIY6fTqGs57P5gVtB4MyRdoaBgcF92wghObp39hss=
+			1FYV/Wq85pqW1F8Kd99sDvyqF/IhxHLnjfXAfEVxY/w=
 			</data>
 		</dict>
 		<key>Modules/DKImagePickerController.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -483,7 +483,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UR+piC8U+lGAeR+OL3iCojnbAoKPl0ZI41W6/Zl9/Vo=
+			odTm8ETXugRCuqdTSIl3fSPvGw9sLDklWKTIgqdHGEI=
 			</data>
 		</dict>
 		<key>Modules/DKImagePickerController.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -504,7 +504,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8eNZmzqZs+WKNSIgJCM2XI2B4/Lozlbhp6ZsHHw894s=
+			sFTDMXCyIR5usmFUoxy0wD7u+qUgGKeHOsuB+QS4BpU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

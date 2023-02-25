@@ -1,9 +1,9 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:spark_f_m_2/flutter_flow/flutter_flow_audio_player.dart';
 import 'package:spark_f_m_2/song_screen/song_screen.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
@@ -111,7 +111,7 @@ class NavBarPage extends StatefulWidget {
 class _NavBarPageState extends State<NavBarPage> {
   String _currentPage = 'LiveRadioTabDemo';
   AssetsAudioPlayer player = new AssetsAudioPlayer();
-  static const double _playerMinHeight = 60.0;
+  static const double _playerMinHeight = 173.0;
   int currentTabIndex = 0;
   bool isPlaying = false;
   Music music;
@@ -132,11 +132,10 @@ class _NavBarPageState extends State<NavBarPage> {
       duration: const Duration(milliseconds: 500),
       color: Colors.blueGrey,
       width: deviceSize.width,
-      height: 50,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset('assets/images/LOVE_IN_MUSIC_(1).png', fit: BoxFit.cover),
           Text(
             'hi',
             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -185,9 +184,57 @@ class _NavBarPageState extends State<NavBarPage> {
             maxHeight: 800,
             builder: (height, percentage) {
               if (percentage > 0.2)
-                return AssetAudioPlayer();
+                return AssetAudioPlayer(
+                    audio: Audio.network(
+                      'https://filesamples.com/samples/audio/mp3/sample3.mp3',
+                      metas: Metas(
+                        id: 'sample3.mp3-jc4rjta0',
+                      ),
+                    ),
+                    titleTextStyle:
+                        FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                    playbackDurationTextStyle:
+                        FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: Color(0xFF9D9D9D),
+                              fontSize: 12,
+                            ),
+                    fillColor: Color(0xFFEEEEEE),
+                    playbackButtonColor:
+                        FlutterFlowTheme.of(context).secondaryColor,
+                    activeTrackColor: Color(0xFF57636C),
+                    elevation: 4,
+                    height: double.infinity,
+                    width: double.infinity);
               else
-                return AssetAudioPlayer();
+                return AssetAudioPlayer(
+                    audio: Audio.network(
+                      'https://filesamples.com/samples/audio/mp3/sample3.mp3',
+                      metas: Metas(
+                        id: 'sample3.mp3-jc4rjta0',
+                      ),
+                    ),
+                    titleTextStyle:
+                        FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                    playbackDurationTextStyle:
+                        FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: Color(0xFF9D9D9D),
+                              fontSize: 12,
+                            ),
+                    fillColor: Color(0xFFEEEEEE),
+                    playbackButtonColor:
+                        FlutterFlowTheme.of(context).secondaryColor,
+                    activeTrackColor: Color(0xFF57636C),
+                    elevation: 4,
+                    height: 100.0,
+                    width: double.infinity);
             },
           ),
           BottomNavigationBar(
