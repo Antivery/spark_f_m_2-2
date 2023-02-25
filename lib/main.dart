@@ -210,7 +210,7 @@ class _NavBarPageState extends State<NavBarPage> {
                     height: double.infinity,
                     width: double.infinity);
               else
-                return AssetAudioPlayer(
+                return LargeAssetAudioPlayer(
                     audio: Audio.network(
                       'https://filesamples.com/samples/audio/mp3/sample3.mp3',
                       metas: Metas(

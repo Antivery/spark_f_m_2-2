@@ -163,6 +163,202 @@ class __AssetAudioPlayerState extends State<AssetAudioPlayer> {
               }));
 }
 
+class LargeAssetAudioPlayer extends StatefulWidget {
+  const LargeAssetAudioPlayer({
+    @required this.audio,
+    this.titleTextStyle,
+    this.playbackDurationTextStyle,
+    this.fillColor,
+    this.playbackButtonColor,
+    this.activeTrackColor,
+    this.elevation,
+    this.height,
+    this.image,
+    this.width,
+  });
+
+  final Audio audio;
+  final TextStyle titleTextStyle;
+  final TextStyle playbackDurationTextStyle;
+  final Color fillColor;
+  final Color playbackButtonColor;
+  final Color activeTrackColor;
+  final double elevation;
+  final double height;
+  final Image image;
+  final double width;
+
+  @override
+  _LargeAssetAudioPlayerState createState() => _LargeAssetAudioPlayerState();
+}
+
+class _LargeAssetAudioPlayerState extends State<LargeAssetAudioPlayer> {
+  AssetsAudioPlayer player = new AssetsAudioPlayer();
+
+  AssetsAudioPlayer _largeAssetsAudioPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    openPlayer();
+  }
+
+  Future openPlayer() async {
+    _largeAssetsAudioPlayer ??=
+        AssetsAudioPlayer.withId(generateRandomAlphaNumericString());
+    if (_largeAssetsAudioPlayer.playlist != null) {
+      _largeAssetsAudioPlayer.playlist.replaceAt(0, (oldAudio) => widget.audio);
+    } else {
+      await _largeAssetsAudioPlayer.open(
+        Playlist(audios: [widget.audio]),
+        loopMode: LoopMode.playlist,
+        showNotification: true,
+        autoStart: true,
+        playInBackground: PlayInBackground.enabled,
+      );
+      _largeAssetsAudioPlayer.next();
+      _largeAssetsAudioPlayer.previous();
+      _largeAssetsAudioPlayer.playlistPlayAtIndex(1);
+    }
+  }
+
+  @override
+  void dispose() {
+    _largeAssetsAudioPlayer?.dispose();
+    super.dispose();
+  }
+
+  Duration currentPosition(RealtimePlayingInfos infos) => infos.currentPosition;
+  Duration duration(RealtimePlayingInfos infos) => infos.duration;
+
+  String playbackStateText(RealtimePlayingInfos infos) {
+    final currentPositionString = durationToString(currentPosition(infos));
+    final durationString = durationToString(duration(infos));
+    return '$currentPositionString/$durationString';
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      _largeAssetsAudioPlayer.builderRealtimePlayingInfos(
+          builder: (context, infos) => PlayerBuilder.isPlaying(
+              player: _largeAssetsAudioPlayer,
+              builder: (context, isPlaying) {
+                final childWidget = Container(
+                  height: widget.height,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: widget.fillColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(15, 10, 0, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/images/LOVE_IN_MUSIC_(1).png',
+                              height: 100,
+                            ),
+                            Text(
+                              widget.audio.metas.title ?? 'Audio Title',
+                              style: widget.titleTextStyle,
+                            ),
+                            Text(
+                              playbackStateText(infos),
+                              style: widget.playbackDurationTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(34),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: IconButton(
+                            onPressed: _largeAssetsAudioPlayer.playOrPause,
+                            icon: Icon(
+                              (isPlaying)
+                                  ? Icons.pause_circle_filled_rounded
+                                  : Icons.play_circle_fill_rounded,
+                              color: widget.playbackButtonColor,
+                              size: 34,
+                            ),
+                            iconSize: 34,
+                          ),
+                        ),
+                      ),
+
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.max,
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Padding(
+                      //       padding: const EdgeInsetsDirectional.fromSTEB(
+                      //           15, 10, 0, 0),
+                      //       child: Column(
+                      //         mainAxisSize: MainAxisSize.max,
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             'assets/images/LOVE_IN_MUSIC_(1).png',
+                      //             height: 100,
+                      //           ),
+                      //           Text(
+                      //             widget.audio.metas.title ?? 'Audio Title',
+                      //             style: widget.titleTextStyle,
+                      //           ),
+                      //           Text(
+                      //             playbackStateText(infos),
+                      //             style: widget.playbackDurationTextStyle,
+                      //           )
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     ClipRRect(
+                      //       borderRadius: BorderRadius.circular(34),
+                      //       child: Material(
+                      //         color: Colors.transparent,
+                      //         child: IconButton(
+                      //           onPressed: _largeAssetsAudioPlayer.playOrPause,
+                      //           icon: Icon(
+                      //             (isPlaying)
+                      //                 ? Icons.pause_circle_filled_rounded
+                      //                 : Icons.play_circle_fill_rounded,
+                      //             color: widget.playbackButtonColor,
+                      //             size: 34,
+                      //           ),
+                      //           iconSize: 34,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      PositionSeekWidget(
+                        currentPosition: currentPosition(infos),
+                        duration: duration(infos),
+                        seekTo: (to) {
+                          _largeAssetsAudioPlayer.seek(to);
+                        },
+                        activeTrackColor: widget.activeTrackColor,
+                      ),
+                    ],
+                  ),
+                );
+                return Material(
+                    color: Color.fromARGB(210, 230, 153, 82),
+                    elevation: widget.elevation,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: childWidget);
+              }));
+}
+
 class PositionSeekWidget extends StatefulWidget {
   const PositionSeekWidget({
     @required this.currentPosition,
