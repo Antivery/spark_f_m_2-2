@@ -3,7 +3,6 @@
 // Generated file. Do not edit.
 //
 
-// @dart = 2.13
 // ignore_for_file: type=lint
 
 import 'package:assets_audio_player_web/web/assets_audio_player_web.dart';
